@@ -1,0 +1,230 @@
+/* ==========================================================================
+   CLOUDMART 360 - ULTRA-LUXURY GLASSMORPHISM & SPECULAR LIGHTING ENGINE
+   ========================================================================== */
+
+/* Ambient Mesh Light Field */
+.ambient-glow-bg {
+  background-color: var(--bg-app);
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.ambient-glow-bg::before {
+  content: '';
+  position: fixed;
+  top: -10vw;
+  left: 20vw;
+  width: 50vw;
+  height: 50vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 87, 34, 0.12) 0%, rgba(255, 87, 34, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat1 18s ease-in-out infinite alternate;
+}
+
+.ambient-glow-bg::after {
+  content: '';
+  position: fixed;
+  bottom: 5vw;
+  right: 10vw;
+  width: 45vw;
+  height: 45vw;
+  max-width: 650px;
+  max-height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat2 22s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6vw, 4vw) scale(1.1); }
+  100% { transform: translate(-4vw, 8vw) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5vw, -6vw) scale(1.08); }
+  100% { transform: translate(4vw, -3vw) scale(0.9); }
+}
+
+/* Glass Specular Panel */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-md), var(--shadow-inner);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.glass-panel-hover:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-lg), var(--shadow-inner), 0 0 24px rgba(255, 87, 34, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Glass Interactive Modal & Drawers */
+.glass-modal {
+  background: rgba(12, 16, 26, 0.94);
+  backdrop-filter: var(--blur-xl);
+  -webkit-backdrop-filter: var(--blur-xl);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-xl), var(--shadow-inner), 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.glass-drawer {
+  background: rgba(10, 14, 22, 0.96);
+  backdrop-filter: var(--blur-xl);
+  -webkit-backdrop-filter: var(--blur-xl);
+  border-left: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-xl), var(--shadow-inner);
+}
+
+/* Luxury Input Surfaces */
+.glass-input {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: all var(--transition-fast);
+  outline: none;
+  font-family: var(--font-sans);
+}
+
+.glass-input:hover {
+  border-color: var(--border-medium);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-input:focus {
+  border-color: var(--brand-primary);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px var(--brand-subtle), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Luxury Buttons */
+.btn-primary-glow {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark) 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(255, 87, 34, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.btn-primary-glow:hover {
+  background: linear-gradient(135deg, var(--brand-hover) 0%, var(--brand-primary) 100%);
+  box-shadow: 0 6px 24px rgba(255, 87, 34, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-primary-glow:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}
+
+/* Shimmer Loading Skeleton */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite ease-in-out;
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Floating Badges Animation */
+@keyframes floatBadge1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes floatBadge2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(6px) rotate(-1deg); }
+}
+
+.float-badge-1 {
+  animation: floatBadge1 4s ease-in-out infinite;
+}
+
+.float-badge-2 {
+  animation: floatBadge2 4.5s ease-in-out infinite;
+}
+
+/* Table Row Glass Interaction */
+.glass-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.glass-table th {
+  background: rgba(14, 18, 28, 0.95);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-default);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.glass-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  transition: background var(--transition-fast);
+}
+
+.glass-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text-primary);
+}
+
+/* Pulse indicator */
+.pulse-status {
+  position: relative;
+  display: inline-block;
+}
+
+.pulse-status::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.6;
+  animation: statusPulse 2s ease-out infinite;
+}
+
+@keyframes statusPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}

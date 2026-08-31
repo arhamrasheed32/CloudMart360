@@ -1,0 +1,18 @@
+{
+  "name": "cloudmart-360",
+  "version": "1.0.0",
+  "description": "CloudMart 360 - Cloud-Based Retail Management & E-Commerce Platform (Module 1: Product Management)",
+  "private": true,
+  "scripts": {
+    "backend": "cd backend && npm run dev",
+    "backend:seed": "cd backend && npm run seed",
+    "frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "build": "cd frontend && npm run build",
+    "test:backend": "cd backend && npm test",
+    "test": "npm run test:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
