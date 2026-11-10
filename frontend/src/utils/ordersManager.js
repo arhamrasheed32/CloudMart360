@@ -153,6 +153,24 @@ export function saveStoredOrder(order) {
     const orders = getStoredOrders();
     const updated = [order, ...orders];
     localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(updated));
+
+    // Also push a live notification into the Admin notification stream
+    try {
+      const notifs = getStoredNotifications();
+      const newNotif = {
+        id: `notif-ord-${Date.now()}`,
+        type: 'success',
+        category: 'Order',
+        title: `Customer Order Placed: #${order.orderId}`,
+        message: `Customer ${order.customer} placed an order for $${Number(order.grandTotal).toFixed(2)} (${order.items?.length || 1} items). Paid via ${order.paymentMethod || 'Credit Card'}.`,
+        time: 'Just now',
+        read: false
+      };
+      saveStoredNotifications([newNotif, ...notifs]);
+    } catch (nErr) {
+      console.warn('Failed to update notifications stream', nErr);
+    }
+
     return updated;
   } catch (e) {
     console.error('Failed to save order to localStorage', e);
