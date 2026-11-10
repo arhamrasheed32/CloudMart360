@@ -434,7 +434,11 @@ export function StoreNavbar({
             size="sm"
             onClick={() => {
               playClickTone();
-              onNavigatePage('admin_login');
+              if (isAdmin) {
+                if (onSwitchToAdmin) onSwitchToAdmin();
+              } else {
+                onNavigatePage('admin_login');
+              }
             }}
             icon={LayoutDashboard}
             style={{
@@ -445,7 +449,7 @@ export function StoreNavbar({
               color: 'var(--brand-primary)'
             }}
           >
-            <span style={{ fontWeight: 700 }}>Admin Login</span>
+            <span style={{ fontWeight: 700 }}>{isAdmin ? 'Admin Console' : 'Admin Login'}</span>
           </Button>
         </div>
       </header>

@@ -3,7 +3,6 @@ import { AppShell } from './components/layout/AppShell.jsx';
 import { ProductDashboard } from './components/products/ProductDashboard.jsx';
 import { StoreView } from './components/storefront/StoreView.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
-import { AuthModal } from './components/layout/AuthModal.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { CurrencyProvider, useCurrency } from './context/CurrencyContext.jsx';
 import { ToastProvider } from './context/ToastContext.jsx';
@@ -11,7 +10,7 @@ import { useProducts } from './hooks/useProducts.js';
 
 function MainApp() {
   const productState = useProducts();
-  const { user, isAdmin, openAuthModal } = useAuth();
+  const { user, isAdmin, closeAuthModal } = useAuth();
   const { currency } = useCurrency(); // Subscribes MainApp to re-render tree when currency changes
   const [appMode, setAppMode] = useState('storefront'); // 'storefront' | 'admin'
   const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false);
@@ -21,17 +20,13 @@ function MainApp() {
     ? productState.allProductsRaw
     : productState.products;
 
-  const handleSwitchToAdmin = () => {
-    if (!isAdmin) {
-      openAuthModal('login');
-      return;
-    }
+  const handleSwitchToAdmin = (adminUser) => {
+    if (closeAuthModal) closeAuthModal();
     setAppMode('admin');
   };
 
   return (
     <>
-      <AuthModal />
       {appMode === 'storefront' ? (
         <StoreView
           products={activeCatalogProducts}

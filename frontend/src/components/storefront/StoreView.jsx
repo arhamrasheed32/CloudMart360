@@ -12,12 +12,14 @@ import { CheckoutModal } from './CheckoutModal.jsx';
 import { StoreProductModal } from './StoreProductModal.jsx';
 import { AppleDynamicIsland } from './apple/AppleDynamicIsland.jsx';
 import { StoreFooter } from './StoreFooter.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export function StoreView({
   products = [],
   onSwitchToAdmin,
   onAdjustStock
 }) {
+  const { isAdmin } = useAuth();
   const [activePage, setActivePage] = useState('home'); // 'home' | 'shop' | 'collections' | 'about' | 'support' | 'auth_signin' | 'auth_signup' | 'admin_login'
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [search, setSearch] = useState('');
@@ -65,8 +67,9 @@ export function StoreView({
           setActivePage('home');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onAdminSuccess={() => {
-          onSwitchToAdmin();
+        onAdminSuccess={(adminData) => {
+          setActivePage('home');
+          if (onSwitchToAdmin) onSwitchToAdmin(adminData);
         }}
       />
     );
@@ -158,7 +161,13 @@ export function StoreView({
       {/* Public Storefront Footer */}
       <StoreFooter
         onSelectCategory={handleNavigateToShop}
-        onSwitchToAdmin={onSwitchToAdmin}
+        onSwitchToAdmin={() => {
+          if (isAdmin) {
+            if (onSwitchToAdmin) onSwitchToAdmin();
+          } else {
+            handlePageChange('admin_login');
+          }
+        }}
       />
     </div>
   );
