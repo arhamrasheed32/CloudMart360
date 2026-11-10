@@ -155,10 +155,10 @@ export const apiService = {
   /**
    * Amazon Cognito: Sign up new customer
    */
-  async signup(email, password, name = '') {
+  async signup(email, password, name = '', phone = '') {
     return await request('/auth/signup', {
       method: 'POST',
-      body: JSON.stringify({ email, password, name })
+      body: JSON.stringify({ email, password, name, phone })
     });
   },
 
@@ -173,12 +173,42 @@ export const apiService = {
   },
 
   /**
-   * Amazon Cognito: Login for Customer or Admin
+   * Amazon Cognito: Resend 6-digit confirmation code
    */
-  async login(email, password) {
+  async resendCode(email) {
+    return await request('/auth/resend-code', {
+      method: 'POST',
+      body: JSON.stringify({ email })
+    });
+  },
+
+  /**
+   * Amazon Cognito: Request forgot password OTP code
+   */
+  async forgotPassword(email) {
+    return await request('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email })
+    });
+  },
+
+  /**
+   * Amazon Cognito: Confirm new password with OTP code
+   */
+  async confirmForgotPassword(email, code, newPassword) {
+    return await request('/auth/confirm-forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email, code, newPassword })
+    });
+  },
+
+  /**
+   * Amazon Cognito: Login for Customer or Admin (with role enforcement)
+   */
+  async login(email, password, requiredRole = null) {
     return await request('/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password, requiredRole })
     });
   }
 };

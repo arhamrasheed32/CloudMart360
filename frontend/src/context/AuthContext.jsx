@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   });
 
   const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authModalInitialTab, setAuthModalInitialTab] = useState('login'); // 'login' | 'signup'
+  const [authModalInitialTab, setAuthModalInitialTab] = useState('login'); // 'login' | 'signup' | 'admin_login'
 
   useEffect(() => {
     if (user) {
@@ -23,12 +23,18 @@ export function AuthProvider({ children }) {
     }
   }, [user]);
 
-  const login = (userData) => {
+  const login = (userData, remember = true) => {
     setUser(userData);
+    if (!remember) {
+      // In-session only
+      sessionStorage.setItem('cloudmart_auth', JSON.stringify(userData));
+    }
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('cloudmart_auth');
+    sessionStorage.removeItem('cloudmart_auth');
   };
 
   const openAuthModal = (tab = 'login') => {
@@ -69,3 +75,4 @@ export function useAuth() {
   }
   return context;
 }
+

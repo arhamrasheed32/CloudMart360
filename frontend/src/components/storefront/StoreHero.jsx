@@ -5,11 +5,16 @@ import {
   ShieldCheck,
   Truck,
   ArrowRight,
-  TrendingUp
+  TrendingUp,
+  UserCheck,
+  Shield
 } from 'lucide-react';
 import { Button } from '../ui/Button.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export function StoreHero({ onExploreCatalog }) {
+  const { user, openAuthModal } = useAuth();
+
   return (
     <section
       style={{
@@ -83,12 +88,46 @@ export function StoreHero({ onExploreCatalog }) {
             fontSize: 'clamp(0.9375rem, 2vw, 1.125rem)',
             color: 'var(--text-secondary)',
             maxWidth: '680px',
-            margin: '0 auto 28px auto',
+            margin: '0 auto 24px auto',
             lineHeight: 1.6
           }}
         >
-          Explore precision-engineered electronics, lifestyle apparel, and home innovations powered directly by Amazon DynamoDB and AWS Serverless technology.
+          Explore precision-engineered electronics, lifestyle essentials, and retail innovations powered directly by Amazon DynamoDB, AWS Lambda, and Amazon Cognito.
         </p>
+
+        {/* Auth CTA Banner if Guest */}
+        {!user && (
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '12px',
+              padding: '6px 8px 6px 16px',
+              borderRadius: 'var(--radius-full)',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid var(--border-medium)',
+              marginBottom: '28px',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            <span style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
+              New to CloudMart? Create your verified account in 30 seconds
+            </span>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => openAuthModal('signup')}
+              style={{
+                height: '32px',
+                padding: '0 14px',
+                fontSize: '0.75rem',
+                fontWeight: 700
+              }}
+            >
+              Sign Up (Customer) &rarr;
+            </Button>
+          </div>
+        )}
 
         {/* Feature Badges */}
         <div
