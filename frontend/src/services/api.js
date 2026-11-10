@@ -1,3 +1,12 @@
+import {
+  cognitoSignUp,
+  cognitoVerifyEmail,
+  cognitoResendCode,
+  cognitoForgotPassword,
+  cognitoConfirmForgotPassword,
+  cognitoSignIn
+} from './cognitoClient.js';
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 class ApiError extends Error {
@@ -153,63 +162,45 @@ export const apiService = {
   },
 
   /**
-   * Amazon Cognito: Sign up new customer
+   * Amazon Cognito: Sign up new customer (Direct AWS Cognito Client)
    */
   async signup(email, password, name = '', phone = '') {
-    return await request('/auth/signup', {
-      method: 'POST',
-      body: JSON.stringify({ email, password, name, phone })
-    });
+    return await cognitoSignUp(email, password, name, phone);
   },
 
   /**
-   * Amazon Cognito: Verify email 6-digit confirmation code
+   * Amazon Cognito: Verify email 6-digit confirmation code (Direct AWS Cognito Client)
    */
   async verifyEmail(email, code) {
-    return await request('/auth/verify', {
-      method: 'POST',
-      body: JSON.stringify({ email, code })
-    });
+    return await cognitoVerifyEmail(email, code);
   },
 
   /**
-   * Amazon Cognito: Resend 6-digit confirmation code
+   * Amazon Cognito: Resend 6-digit confirmation code (Direct AWS Cognito Client)
    */
   async resendCode(email) {
-    return await request('/auth/resend-code', {
-      method: 'POST',
-      body: JSON.stringify({ email })
-    });
+    return await cognitoResendCode(email);
   },
 
   /**
-   * Amazon Cognito: Request forgot password OTP code
+   * Amazon Cognito: Request forgot password OTP code (Direct AWS Cognito Client)
    */
   async forgotPassword(email) {
-    return await request('/auth/forgot-password', {
-      method: 'POST',
-      body: JSON.stringify({ email })
-    });
+    return await cognitoForgotPassword(email);
   },
 
   /**
-   * Amazon Cognito: Confirm new password with OTP code
+   * Amazon Cognito: Confirm new password with OTP code (Direct AWS Cognito Client)
    */
   async confirmForgotPassword(email, code, newPassword) {
-    return await request('/auth/confirm-forgot-password', {
-      method: 'POST',
-      body: JSON.stringify({ email, code, newPassword })
-    });
+    return await cognitoConfirmForgotPassword(email, code, newPassword);
   },
 
   /**
-   * Amazon Cognito: Login for Customer or Admin (with role enforcement)
+   * Amazon Cognito: Login for Customer or Admin (Direct AWS Cognito Client)
    */
   async login(email, password, requiredRole = null) {
-    return await request('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password, requiredRole })
-    });
+    return await cognitoSignIn(email, password, requiredRole);
   }
 };
 

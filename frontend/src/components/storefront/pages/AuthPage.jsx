@@ -985,3 +985,4 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
     </div>
   );
 }
+
