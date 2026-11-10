@@ -10,9 +10,7 @@ import {
   BarChart3,
   HelpCircle,
   AlertCircle,
-  Boxes,
-  Camera,
-  Barcode
+  Boxes
 } from 'lucide-react';
 import { Button } from '../ui/Button.jsx';
 import { ProductKpiCards } from './ProductKpiCards.jsx';
@@ -29,7 +27,6 @@ import { ProductAnalyticsPanel } from './ProductAnalyticsPanel.jsx';
 import { CatalogImportModal } from './CatalogImportModal.jsx';
 import { BulkRestockModal } from './BulkRestockModal.jsx';
 import { ProductComparisonModal } from './ProductComparisonModal.jsx';
-import { LiveBarcodeScannerModal } from './LiveBarcodeScannerModal.jsx';
 import { KeyboardShortcutsModal } from '../ui/KeyboardShortcutsModal.jsx';
 import { Pagination } from '../ui/Pagination.jsx';
 import { CommandPalette } from '../ui/CommandPalette.jsx';
@@ -96,7 +93,6 @@ export function ProductDashboard({
   const [importModalOpen, setImportModalOpen] = useState(false);
   const [restockModalOpen, setRestockModalOpen] = useState(false);
   const [compareModalOpen, setCompareModalOpen] = useState(false);
-  const [scannerModalOpen, setScannerModalOpen] = useState(false);
   const [shortcutsModalOpen, setShortcutsModalOpen] = useState(false);
   const [isProcessingBatch, setIsProcessingBatch] = useState(false);
   const pageSize = 8;
@@ -445,19 +441,6 @@ export function ProductDashboard({
           </Button>
 
           <Button
-            variant="secondary"
-            size="md"
-            onClick={() => {
-              playClickTone();
-              setScannerModalOpen(true);
-            }}
-            icon={Camera}
-            title="Scan Barcode / QR with Camera or Scanner"
-          >
-            <span className="desktop-btn-text">Scan Barcode</span>
-          </Button>
-
-          <Button
             variant="primary"
             size="md"
             onClick={handleOpenAdd}
@@ -625,15 +608,6 @@ export function ProductDashboard({
         onExportCSV={handleExportFullCatalog}
         onRefresh={() => fetchProducts(true)}
         onToggleViewMode={() => setViewMode(viewMode === 'table' ? 'grid' : 'table')}
-      />
-
-      {/* Live Barcode & QR Scanner Modal */}
-      <LiveBarcodeScannerModal
-        isOpen={scannerModalOpen}
-        onClose={() => setScannerModalOpen(false)}
-        products={allProductsRaw.length > 0 ? allProductsRaw : products}
-        onAdjustStock={adjustStock}
-        onViewProduct={handleOpenDetails}
       />
 
       {/* CSV / JSON Bulk Catalog Importer Modal */}
