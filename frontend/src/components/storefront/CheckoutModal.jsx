@@ -174,16 +174,16 @@ export function CheckoutModal({
     setCurrentStep('processing');
     setProcessingStage(1);
 
-    // Stage 1: TLS Handshake
-    await new Promise((r) => setTimeout(r, 600));
+    // Stage 1: TLS Handshake (Snappy & Responsive)
+    await new Promise((r) => setTimeout(r, 150));
     setProcessingStage(2);
 
     // Stage 2: Bank / Gateway Authorization
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, 180));
     setProcessingStage(3);
 
     // Stage 3: DynamoDB Stock Reservation
-    await new Promise((r) => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 150));
 
     const orderNumber = `CM360-ORD-${Math.floor(100000 + Math.random() * 900000)}`;
     const txId = `tx_sec_${Math.random().toString(36).substring(2, 11)}_${Date.now().toString().slice(-4)}`;
@@ -228,7 +228,7 @@ export function CheckoutModal({
 
     setOrderReceipt(receipt);
 
-    // Persist to Admin Orders Database
+    // Persist to Admin Orders Database & Notifications
     saveStoredOrder({
       orderId: orderNumber,
       date: 'Just now',
@@ -243,9 +243,16 @@ export function CheckoutModal({
       items: [...items]
     });
 
-    // Mutate live DynamoDB stock in parent
+    // Mutate live DynamoDB stock in parent safely with timeout protection
     if (onCompleteOrder) {
-      await onCompleteOrder(items);
+      try {
+        await Promise.race([
+          onCompleteOrder(items),
+          new Promise((r) => setTimeout(r, 600))
+        ]);
+      } catch (stockSyncErr) {
+        console.warn('[CheckoutModal] Non-blocking stock sync notice:', stockSyncErr?.message || stockSyncErr);
+      }
     }
 
     clearCart();

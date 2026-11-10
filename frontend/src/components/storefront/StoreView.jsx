@@ -76,10 +76,15 @@ export function StoreView({
   }
 
   const handleCompleteOrder = async (orderedItems) => {
-    // Decrement stock in DynamoDB for each purchased item
+    // Decrement stock in DynamoDB for each purchased item safely
+    if (!onAdjustStock || !Array.isArray(orderedItems)) return;
     for (const item of orderedItems) {
       if (item.product && item.product.id) {
-        await onAdjustStock(item.product.id, -item.quantity);
+        try {
+          await onAdjustStock(item.product.id, -item.quantity);
+        } catch (err) {
+          console.warn('[StoreView] Stock adjustment non-fatal notice for item:', item.product.id, err?.message || err);
+        }
       }
     }
   };
