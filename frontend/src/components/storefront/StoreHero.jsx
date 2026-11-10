@@ -58,7 +58,7 @@ export function StoreHero({ onExploreCatalog }) {
           }}
         >
           <Sparkles size={13} />
-          <span>CloudMart 360 • Live Retail Storefront</span>
+          <span>CloudMart 360 • Curated Storefront</span>
         </div>
 
         <h1
@@ -79,7 +79,7 @@ export function StoreHero({ onExploreCatalog }) {
               WebkitTextFillColor: 'transparent'
             }}
           >
-            Real-Time Cloud Inventory.
+            Engineered for Everyday Excellence.
           </span>
         </h1>
 
@@ -92,7 +92,7 @@ export function StoreHero({ onExploreCatalog }) {
             lineHeight: 1.6
           }}
         >
-          Explore precision-engineered electronics, lifestyle essentials, and retail innovations powered directly by Amazon DynamoDB, AWS Lambda, and Amazon Cognito.
+          Explore precision-engineered electronics, artisanal lifestyle goods, and sustainable apparel crafted with meticulous quality and fast global delivery.
         </p>
 
         {/* Auth CTA Banner if Guest */}
@@ -111,7 +111,7 @@ export function StoreHero({ onExploreCatalog }) {
             }}
           >
             <span style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-              New to CloudMart? Create your verified account in 30 seconds
+              New to CloudMart 360? Create an account to track orders and unlock member benefits
             </span>
             <Button
               variant="primary"
@@ -124,7 +124,7 @@ export function StoreHero({ onExploreCatalog }) {
                 fontWeight: 700
               }}
             >
-              Sign Up (Customer) &rarr;
+              Create Account &rarr;
             </Button>
           </div>
         )}
@@ -148,12 +148,12 @@ export function StoreHero({ onExploreCatalog }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Zap size={16} color="var(--brand-primary)" />
-            <span>Live Stock Sync (DynamoDB)</span>
+            <span>Real-Time Stock Availability</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <ShieldCheck size={16} color="var(--color-info)" />
-            <span>1-Year Official Warranty</span>
+            <span>2-Year Manufacturer Warranty</span>
           </div>
         </div>
       </div>

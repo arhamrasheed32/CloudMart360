@@ -80,21 +80,21 @@ export function AppleDynamicIsland({
             style={{ color: '#94A3B8', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             className="hover-underline"
           >
-            Bento Tech
+            Engineering
           </button>
           <button
             onClick={() => window.scrollTo({ top: 1400, behavior: 'smooth' })}
             style={{ color: '#94A3B8', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             className="hover-underline"
           >
-            Sound Chamber
+            Acoustics
           </button>
           <button
             onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth' })}
             style={{ color: '#94A3B8', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             className="hover-underline"
           >
-            Compare
+            Compare Models
           </button>
         </div>
 

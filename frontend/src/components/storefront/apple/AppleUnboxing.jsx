@@ -14,7 +14,7 @@ const BOX_CONTENTS = [
   { title: 'Magnetic Hard-Shell Travel Folio', desc: 'Ultra-slim shock-absorbing magnetic travel enclosure' },
   { title: 'Braided Kevlar USB-C Fast Cable (2m)', desc: 'Reinforced 100W power delivery & lossless audio pass' },
   { title: '3.5mm Gold-Plated Hi-Res Cable', desc: 'Analog backup for studio mixers and flights' },
-  { title: 'DynamoDB Provenance Certificate', desc: 'Serialized cryptographic identity & 2-year warranty card' }
+  { title: 'Serialized Certificate of Authenticity', desc: 'Individually numbered hardware validation and 2-year warranty card' }
 ];
 
 export function AppleUnboxing() {

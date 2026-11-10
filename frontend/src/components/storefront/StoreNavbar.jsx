@@ -64,8 +64,8 @@ export function StoreNavbar({
     { id: 'home', label: 'Home' },
     { id: 'shop', label: 'Shop Catalog' },
     { id: 'collections', label: 'Collections' },
-    { id: 'about', label: 'Technology & Cloud' },
-    { id: 'support', label: 'Track Order / Help' }
+    { id: 'about', label: 'About Us' },
+    { id: 'support', label: 'Order Tracking & Help' }
   ];
 
   return (
@@ -93,7 +93,7 @@ export function StoreNavbar({
         <span>Free Express Delivery on orders over $150</span>
         <span>•</span>
         <span style={{ color: 'var(--color-success)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <Zap size={11} /> 100% Real-Time AWS DynamoDB Sync
+          <Zap size={11} /> Guaranteed Authenticity & Real-Time Stock
         </span>
       </div>
 
@@ -187,7 +187,7 @@ export function StoreNavbar({
           />
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder="Search products by name, brand, or SKU..."
             value={search}
             onChange={(e) => {
               onSearchChange(e.target.value);

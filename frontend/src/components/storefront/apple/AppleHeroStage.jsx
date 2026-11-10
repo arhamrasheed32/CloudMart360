@@ -135,7 +135,7 @@ export function AppleHeroStage({
             letterSpacing: '-0.01em'
           }}
         >
-          Aerospace titanium. Custom 40mm bio-cellulose acoustic engine. 40-hour battery life. Connected directly to Amazon DynamoDB in real time.
+          Aerospace titanium construction. Custom 40mm bio-cellulose acoustic drivers. 40-hour battery life with USB-C fast charging.
         </p>
 
         {/* Pricing and Action Bar */}

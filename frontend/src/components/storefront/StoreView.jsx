@@ -24,7 +24,11 @@ export function StoreView({
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
   const [selectedProductForQuickView, setSelectedProductForQuickView] = useState(null);
 
-  const featuredProduct = products.find((p) => p.category === 'Electronics') || products[0];
+  const featuredProduct =
+    products.find((p) => p.id === 'prod-001-aura-pro') ||
+    products.find((p) => p.name?.toLowerCase().includes('aura')) ||
+    products.find((p) => p.category === 'Electronics') ||
+    products[0];
 
   const handleNavigateToShop = (category = 'all') => {
     setSelectedCategory(category);

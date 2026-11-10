@@ -58,7 +58,11 @@ export function HomePage({
   onQuickView
 }) {
   const { addToCart } = useCart();
-  const featuredProduct = products.find((p) => p.category === 'Electronics') || products[0];
+  const featuredProduct =
+    products.find((p) => p.id === 'prod-001-aura-pro') ||
+    products.find((p) => p.name?.toLowerCase().includes('aura')) ||
+    products.find((p) => p.category === 'Electronics') ||
+    products[0];
   const bestSellers = products.slice(0, 4);
 
   return (
@@ -90,7 +94,7 @@ export function HomePage({
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '28px' }}>
           <div>
             <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--brand-primary)', marginBottom: '6px' }}>
-              Handcrafted Portfolios
+              Curated Collections
             </div>
             <h2 style={{ fontSize: '2.25rem', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.03em' }}>
               Explore Categories
@@ -100,7 +104,7 @@ export function HomePage({
             onClick={() => onNavigateToShop('all')}
             style={{ color: 'var(--brand-primary)', fontWeight: 700, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
           >
-            <span>View All Storefront</span>
+            <span>View Entire Catalog</span>
             <ChevronRight size={16} />
           </button>
         </div>
@@ -180,12 +184,12 @@ export function HomePage({
               </h2>
             </div>
             <p style={{ fontSize: '0.875rem', color: '#94A3B8', marginTop: '4px' }}>
-              Direct live stock queried from Amazon DynamoDB DocumentClient.
+              Handpicked essentials engineered for performance, style, and everyday utility.
             </p>
           </div>
 
           <Button variant="secondary" size="sm" onClick={() => onNavigateToShop('all')}>
-            Shop All ({products.length})
+            Browse All ({products.length})
           </Button>
         </div>
 

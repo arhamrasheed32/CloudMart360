@@ -82,7 +82,7 @@ export function CartDrawer({ onOpenCheckout }) {
       isOpen={isCartOpen}
       onClose={() => setIsCartOpen(false)}
       title={`Shopping Cart (${totalItemsCount})`}
-      subtitle="Review your selected products before cloud order fulfillment."
+      subtitle="Review your selected items before proceeding to secure checkout."
       footer={items.length > 0 ? footer : null}
       width="480px"
     >
@@ -128,7 +128,7 @@ export function CartDrawer({ onOpenCheckout }) {
               Your cart is empty
             </div>
             <p style={{ fontSize: '0.8125rem', marginTop: '6px', color: 'var(--text-secondary)' }}>
-              Browse the catalog to discover products and add them to your cart.
+              Explore our curated catalog to discover premium essentials and add them to your cart.
             </p>
           </div>
         ) : (

@@ -164,7 +164,7 @@ export function AdminLoginPage({ onBackToHome, onAdminSuccess }) {
               Admin Portal
             </h1>
             <p style={{ fontSize: '0.8125rem', color: '#9CA3AF' }}>
-              Restricted to verified accounts in the <strong style={{ color: '#FF5722' }}>Amazon Cognito Admins group</strong>.
+              Restricted to verified administrative personnel.
             </p>
           </div>
 
@@ -250,7 +250,7 @@ export function AdminLoginPage({ onBackToHome, onAdminSuccess }) {
                 marginTop: '4px'
               }}
             >
-              {loading ? 'Verifying Admin Claims with AWS Cognito...' : 'Authenticate as Administrator'}
+              {loading ? 'Verifying Administrator Credentials...' : 'Sign In as Administrator'}
             </Button>
 
             {/* Demo Master Admin Pill */}

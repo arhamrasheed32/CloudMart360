@@ -399,10 +399,10 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
             <div>
               <div style={{ textAlign: 'center', marginBottom: '24px' }}>
                 <h1 style={{ fontSize: '1.65rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '6px' }}>
-                  Sign in to CloudMart
+                  Sign In to CloudMart
                 </h1>
                 <p style={{ fontSize: '0.8125rem', color: '#9CA3AF' }}>
-                  Enter your registered credentials authenticated securely by <strong style={{ color: '#FF5722' }}>Amazon Cognito</strong>.
+                  Welcome back. Enter your credentials to access your orders and saved items.
                 </p>
               </div>
 
@@ -501,7 +501,7 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
                     marginTop: '8px'
                   }}
                 >
-                  {loading ? 'Authenticating with AWS Cognito...' : 'Sign In'}
+                  {loading ? 'Signing In...' : 'Sign In'}
                 </Button>
 
                 <div style={{ textAlign: 'center', fontSize: '0.8125rem', color: '#9CA3AF', marginTop: '12px' }}>
@@ -526,7 +526,7 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
                   Create Customer Account
                 </h1>
                 <p style={{ fontSize: '0.8125rem', color: '#9CA3AF' }}>
-                  Register directly in the <strong style={{ color: '#FF5722' }}>Amazon Cognito User Pool</strong> with genuine email OTP verification.
+                  Join CloudMart 360 to enjoy fast checkout, live order tracking, and member benefits.
                 </p>
               </div>
 
@@ -542,7 +542,7 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Arham Raheed"
+                      placeholder="Jane Doe"
                       style={{
                         width: '100%',
                         padding: '11px 14px 11px 40px',
@@ -700,7 +700,7 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
                     style={{ accentColor: '#FF5722', width: '16px', height: '16px', marginTop: '2px', cursor: 'pointer' }}
                   />
                   <label htmlFor="terms" style={{ cursor: 'pointer', lineHeight: 1.4 }}>
-                    I agree to the <strong style={{ color: '#FFFFFF' }}>Terms of Service</strong> and consent to Amazon Cognito account verification.
+                    I agree to the <strong style={{ color: '#FFFFFF' }}>Terms of Service</strong> and <strong style={{ color: '#FFFFFF' }}>Privacy Policy</strong>.
                   </label>
                 </div>
 
@@ -719,7 +719,7 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
                     marginTop: '8px'
                   }}
                 >
-                  {loading ? 'Creating Account in Cognito...' : 'Create Account & Send Email OTP'}
+                  {loading ? 'Creating Account...' : 'Create Account & Send Verification Code'}
                 </Button>
 
                 <div style={{ textAlign: 'center', fontSize: '0.8125rem', color: '#9CA3AF', marginTop: '8px' }}>

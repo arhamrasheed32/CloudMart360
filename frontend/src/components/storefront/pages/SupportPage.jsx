@@ -31,11 +31,11 @@ const FAQS = [
   },
   {
     q: 'How is inventory verified in real time?',
-    a: 'Unlike legacy e-commerce systems that use batch processing, CloudMart 360 connects directly to Amazon DynamoDB DocumentClient. Stock counts decrement atomically upon checkout completion, preventing any accidental overselling.'
+    a: 'Unlike traditional retail platforms with batch inventory delays, CloudMart 360 utilizes real-time catalog synchronization. Stock reserves instantaneously upon checkout, completely preventing backorders or overselling.'
   },
   {
     q: 'Do products include official manufacturer warranty?',
-    a: 'Yes. All hardware, electronics, and precision goods sold on CloudMart 360 come with a 1-year to 2-year complete official manufacturer warranty covering parts, labor, and electrical defects.'
+    a: 'Yes. All hardware, electronics, and lifestyle items sold on CloudMart 360 include an official 2-year manufacturer warranty covering manufacturing defects, materials, and workmanship.'
   }
 ];
 
@@ -62,7 +62,7 @@ export function SupportPage() {
       currentCity: 'San Francisco, CA Distribution Center',
       estimatedDelivery: 'Tomorrow, by 4:00 PM',
       steps: [
-        { title: 'Order Verified in DynamoDB', time: 'Aug 30, 10:14 AM', done: true },
+        { title: 'Order Confirmed & Payment Verified', time: 'Aug 30, 10:14 AM', done: true },
         { title: 'Fulfillment & Quality Inspection', time: 'Aug 30, 02:30 PM', done: true },
         { title: 'Departed Regional Distribution Hub', time: 'Aug 31, 01:15 AM', done: true },
         { title: 'Out for Delivery with Courier', time: 'Aug 31, 07:45 AM', active: true }
@@ -148,7 +148,7 @@ export function SupportPage() {
                   currentCity: 'San Francisco, CA Distribution Center',
                   estimatedDelivery: 'Tomorrow, by 4:00 PM',
                   steps: [
-                    { title: 'Order Verified in DynamoDB', time: 'Aug 30, 10:14 AM', done: true },
+                    { title: 'Order Confirmed & Payment Verified', time: 'Aug 30, 10:14 AM', done: true },
                     { title: 'Fulfillment & Quality Inspection', time: 'Aug 30, 02:30 PM', done: true },
                     { title: 'Departed Regional Distribution Hub', time: 'Aug 31, 01:15 AM', done: true },
                     { title: 'Out for Delivery with Courier', time: 'Aug 31, 07:45 AM', active: true }

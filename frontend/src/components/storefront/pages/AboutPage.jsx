@@ -18,13 +18,13 @@ export function AboutPage() {
       {/* Intro Header */}
       <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
         <div className="badge" style={{ background: 'rgba(255, 87, 34, 0.15)', color: 'var(--brand-primary)', marginBottom: '12px' }}>
-          Our Story & Infrastructure
+          Our Vision & Technology
         </div>
         <h1 style={{ fontSize: '2.75rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-          Building the Future of Cloud-Native Retail.
+          Engineering the Next Generation of Retail.
         </h1>
         <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', marginTop: '14px', lineHeight: 1.6 }}>
-          CloudMart 360 was founded to eliminate the latency, inventory inaccuracies, and clunky user experiences of legacy e-commerce platforms through modern AWS Serverless computing.
+          CloudMart 360 was founded to eliminate stock inaccuracies, checkout latency, and fragmented customer experiences. By pairing curated premium craftsmanship with high-availability cloud architecture, we deliver a seamless, reliable shopping journey.
         </p>
       </div>
 
@@ -38,10 +38,10 @@ export function AboutPage() {
             <Zap size={22} />
           </div>
           <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            Zero-Latency Stock Synchronization
+            Real-Time Inventory Accuracy
           </h3>
           <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-            Every item purchased in our customer storefront immediately decrements the database record in Amazon DynamoDB with sub-10ms transaction times.
+            Never face unexpected backorders or delayed cancellations. Every product in our storefront reflects live fulfillment center inventory with instant stock reservation upon checkout.
           </p>
         </SpotlightCard>
 
@@ -53,10 +53,10 @@ export function AboutPage() {
             <ShieldCheck size={22} />
           </div>
           <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            Enterprise Reliability & Security
+            Enterprise Security & Reliability
           </h3>
           <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-            Built on AWS API Gateway and multi-region AWS Lambda functions, guaranteeing 99.99% uptime and 256-bit bank-grade encryption on all transactions.
+            Protected by 256-bit SSL encryption, automated AWS security controls, and high-availability serverless architecture guaranteeing 99.99% uptime and verified authentication.
           </p>
         </SpotlightCard>
 
@@ -68,10 +68,10 @@ export function AboutPage() {
             <Globe size={22} />
           </div>
           <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            Global Sustainable Logistics
+            Sustainable Global Fulfillment
           </h3>
           <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-            We partner with carbon-neutral couriers and 100% recyclable biodegradable packaging across 42 global distribution hubs.
+            We partner with carbon-conscious global couriers and utilize 100% recyclable, plastic-free packaging to ensure mindful delivery to your doorstep.
           </p>
         </SpotlightCard>
       </div>
@@ -91,10 +91,10 @@ export function AboutPage() {
       >
         <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-            AWS Serverless Technology Stack
+            High-Performance Cloud Architecture
           </h2>
           <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-            How customer checkout requests flow through the cloud in milliseconds.
+            Delivering instant page responses and reliable multi-region fulfillment.
           </p>
         </div>
 

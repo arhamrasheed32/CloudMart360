@@ -78,7 +78,7 @@ export function ShopPage({
           Shop All Products
         </h1>
         <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-          Showing {sortedProducts.length} items from Amazon DynamoDB live catalog.
+          Showing {sortedProducts.length} curated products with real-time availability.
         </p>
       </div>
 
@@ -168,12 +168,12 @@ export function ShopPage({
           {/* Price Range Slider / Inputs */}
           <div>
             <label style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: '6px' }}>
-              Price Range ($ USD)
+              Price Range
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               <input
                 type="number"
-                placeholder="Min $"
+                placeholder="Min"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 className="glass-input"
@@ -181,7 +181,7 @@ export function ShopPage({
               />
               <input
                 type="number"
-                placeholder="Max $"
+                placeholder="Max"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 className="glass-input"
@@ -235,10 +235,10 @@ export function ShopPage({
             <div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--text-muted)' }}>
               <Package size={48} color="var(--text-faint)" style={{ margin: '0 auto 12px auto' }} />
               <div style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                No products match these criteria
+                No products match your criteria
               </div>
               <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                Try adjusting your price range or clearing active category filters.
+                Try adjusting your search keywords, price range, or category filter.
               </p>
               <Button variant="secondary" size="sm" onClick={resetAllFilters} style={{ marginTop: '16px' }}>
                 Reset Filters

@@ -35,7 +35,7 @@ export function StoreReviewsSection({ product }) {
       rating: 5,
       date: '1 week ago',
       verified: true,
-      comment: 'Exceeded my expectations. Performance is instantaneous and battery life surpasses the advertised rating. Highly recommended!'
+      comment: 'Exceeded my expectations. The build quality, materials, and everyday performance are exceptional. Highly recommended!'
     },
     {
       id: 'rev-3',

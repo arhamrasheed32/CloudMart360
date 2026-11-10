@@ -16,21 +16,21 @@ const COLLECTIONS = [
   {
     id: 'wfh',
     title: 'Workplace Ergonomics & Focus',
-    tagline: 'High-precision engineering tailored for all-day creative workflows.',
+    tagline: 'High-performance displays, wearables, and precision audio tailored for creative productivity.',
     coverImage: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=900&q=80',
     categoryMatch: 'Electronics'
   },
   {
     id: 'apparel',
     title: 'Minimalist Earth & Weather Wear',
-    tagline: '100% GOTS certified organic textiles engineered for climate versatility.',
+    tagline: 'Superfine natural fibers and technical fabrics engineered for climate versatility and all-day comfort.',
     coverImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=900&q=80',
     categoryMatch: 'Apparel & Fashion'
   },
   {
     id: 'home',
-    title: 'Artisanal Coffee & Morning Rituals',
-    tagline: 'Single-origin beans, heat-resistant borosilicate glass, and precision kettles.',
+    title: 'Artisanal Living & Morning Rituals',
+    tagline: 'Specialty coffee essentials, precision gooseneck kettles, and acoustic living decor.',
     coverImage: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=900&q=80',
     categoryMatch: 'Home & Kitchen'
   }
@@ -54,7 +54,7 @@ export function CollectionsPage({
           Signature Collections
         </h1>
         <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '6px', maxWidth: '600px' }}>
-          Explore harmoniously curated equipment packages and themed lifestyle capsules.
+          Explore thoughtfully curated product capsules and lifestyle essentials tailored for modern work, travel, and home.
         </p>
       </div>
 

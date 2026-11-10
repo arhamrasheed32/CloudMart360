@@ -57,7 +57,7 @@ export function StoreFooter({ onSelectCategory, onSwitchToAdmin }) {
             </span>
           </div>
           <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '280px' }}>
-            Next-generation cloud-native retail management and customer storefront powered by Amazon DynamoDB & AWS Serverless.
+            A modern curated marketplace delivering precision electronics, sustainable fashion, and artisanal home essentials with fast, reliable global fulfillment.
           </p>
         </div>
 
@@ -83,18 +83,18 @@ export function StoreFooter({ onSelectCategory, onSwitchToAdmin }) {
         {/* Col 3: Architecture & Admin */}
         <div>
           <div style={{ fontSize: '0.8125rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: '14px', letterSpacing: '0.04em' }}>
-            Operations & Cloud
+            Platform & Security
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
             <button
               onClick={onSwitchToAdmin}
               style={{ textAlign: 'left', color: 'var(--brand-primary)', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             >
-              ⚙️ Switch to Admin Console (Module 1)
+              ⚙️ Admin Portal Access
             </button>
-            <span>AWS API Gateway (REST Stage: Prod)</span>
-            <span>AWS Lambda Node.js Handlers</span>
-            <span>Amazon DynamoDB Document Engine</span>
+            <span>Real-Time Stock Availability</span>
+            <span>256-Bit SSL Encrypted Checkout</span>
+            <span>Guaranteed Authenticity</span>
           </div>
         </div>
 
@@ -104,7 +104,7 @@ export function StoreFooter({ onSelectCategory, onSwitchToAdmin }) {
             Stay Updated
           </div>
           <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
-            Receive instant alerts on new catalog items and private retail releases.
+            Subscribe to the CloudMart 360 newsletter for new collection drops, limited releases, and member perks.
           </p>
           <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '6px' }}>
             <input
@@ -117,7 +117,7 @@ export function StoreFooter({ onSelectCategory, onSwitchToAdmin }) {
               required
             />
             <Button variant="primary" size="sm" type="submit" style={{ height: '36px' }}>
-              Join
+              Subscribe
             </Button>
           </form>
         </div>

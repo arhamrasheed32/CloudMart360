@@ -92,7 +92,7 @@ export function CheckoutModal({
       title={step === 'form' ? 'Express Checkout' : 'Order Confirmed!'}
       subtitle={
         step === 'form'
-          ? 'Secure 256-bit encrypted checkout powered by AWS Serverless.'
+          ? 'Secure 256-bit encrypted checkout with instant order confirmation.'
           : `Receipt #${orderReceipt?.orderNumber || ''}`
       }
       maxWidth="620px"
@@ -264,7 +264,7 @@ export function CheckoutModal({
               Thank you for your order!
             </h3>
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-              Your order <strong style={{ color: 'var(--brand-primary)' }}>{orderReceipt?.orderNumber}</strong> has been successfully processed in Amazon DynamoDB.
+              Your order <strong style={{ color: 'var(--brand-primary)' }}>{orderReceipt?.orderNumber}</strong> has been confirmed and forwarded for immediate fulfillment.
             </p>
           </div>
 

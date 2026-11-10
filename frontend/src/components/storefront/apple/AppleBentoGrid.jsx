@@ -184,7 +184,7 @@ export function AppleBentoGrid() {
           </div>
         </SpotlightCard>
 
-        {/* Bento 5: Amazon DynamoDB Cloud Sync (Span 4) */}
+        {/* Bento 5: Multipoint Bluetooth 5.3 (Span 4) */}
         <SpotlightCard
           spotlightColor="rgba(245, 158, 11, 0.15)"
           style={{
@@ -203,14 +203,14 @@ export function AppleBentoGrid() {
           <div>
             <Zap size={24} color="#F59E0B" style={{ marginBottom: '12px' }} />
             <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFFFFF' }}>
-              DynamoDB Live Sync
+              Multipoint Bluetooth 5.3
             </h4>
             <p style={{ fontSize: '0.8125rem', color: '#94A3B8', marginTop: '6px', lineHeight: 1.5 }}>
-              Inventory counts and order reservations are synchronized across global AWS edge locations with zero database locks.
+              Seamlessly pair and transition between your phone, tablet, and workstation with ultra-low latency audio synchronization.
             </p>
           </div>
           <div style={{ fontSize: '0.75rem', color: '#F59E0B', fontWeight: 700 }}>
-            &lt;10ms Atomic Transactions
+            Instant Device Handoff
           </div>
         </SpotlightCard>
       </div>

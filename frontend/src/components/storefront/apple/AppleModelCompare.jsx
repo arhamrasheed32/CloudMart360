@@ -29,7 +29,7 @@ const MODELS = [
   {
     id: 'aura-pro',
     name: 'Aura Pro Flagship',
-    tagline: 'The pinnacle of acoustic precision and cloud sync.',
+    tagline: 'The pinnacle of acoustic precision, active noise cancellation, and all-day comfort.',
     price: 249.99,
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80',
     battery: '40 hours',

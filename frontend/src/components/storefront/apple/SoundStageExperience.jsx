@@ -32,7 +32,7 @@ const AUDIO_MODES = [
     id: 'transparency',
     title: 'Adaptive Transparency',
     subtitle: 'Natural Acoustic Pass-Through',
-    freqLabel: 'Zero-Latency Ambient Mix • H1 Acoustic Processor',
+    freqLabel: 'Zero-Latency Ambient Mix • Dual Neural DSP Engine',
     desc: 'Hear conversations naturally while attenuating sudden loud construction spikes.'
   }
 ];
