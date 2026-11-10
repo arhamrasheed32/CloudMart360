@@ -156,3 +156,4 @@ export async function cognitoSignIn(email, password, requiredRole = null) {
     expiresIn: response.AuthenticationResult?.ExpiresIn
   };
 }
+

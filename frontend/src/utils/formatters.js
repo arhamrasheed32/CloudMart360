@@ -1,11 +1,7 @@
-export function formatCurrency(amount) {
-  const num = Number(amount || 0);
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(num);
+import { formatCurrencyWithConfig } from '../context/CurrencyContext.jsx';
+
+export function formatCurrency(amount, currencyCode) {
+  return formatCurrencyWithConfig(amount, currencyCode);
 }
 
 export function formatNumber(num) {

@@ -19,6 +19,7 @@ import { Button } from '../ui/Button.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useCurrency } from '../../context/CurrencyContext.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { CurrencySelector } from './CurrencySelector.jsx';
 import { formatCurrency } from '../../utils/formatters.js';
 import { playClickTone } from '../../utils/audioFeedback.js';
 
@@ -301,30 +302,8 @@ export function StoreNavbar({
 
         {/* Right Controls: Currency Selector + Cart Button + Admin Mode Switch */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {/* Multi-Currency Selector Dropdown */}
-          <select
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            className="glass-input"
-            aria-label="Select Currency"
-            style={{
-              height: '36px',
-              padding: '0 10px',
-              borderRadius: 'var(--radius-full)',
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid var(--border-medium)',
-              color: 'var(--text-primary)'
-            }}
-          >
-            {Object.entries(rates).map(([code, r]) => (
-              <option key={code} value={code} style={{ background: '#0C101A' }}>
-                {r.flag} {code} ({r.symbol})
-              </option>
-            ))}
-          </select>
+          {/* Professional 6-Currency Selector Dropdown */}
+          <CurrencySelector />
 
           {/* Shopping Cart Button */}
           <button

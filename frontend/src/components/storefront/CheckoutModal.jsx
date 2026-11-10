@@ -14,6 +14,7 @@ import { Modal } from '../ui/Modal.jsx';
 import { Button } from '../ui/Button.jsx';
 import { Input } from '../ui/Input.jsx';
 import { useCart } from '../../context/CartContext.jsx';
+import { useCurrency } from '../../context/CurrencyContext.jsx';
 import { formatCurrency } from '../../utils/formatters.js';
 import { playSuccessChime } from '../../utils/audioFeedback.js';
 
@@ -23,6 +24,7 @@ export function CheckoutModal({
   onCompleteOrder
 }) {
   const { items, subtotal, shippingFee, estimatedTax, grandTotal, clearCart } = useCart();
+  const { currency } = useCurrency();
 
   const [step, setStep] = useState('form'); // 'form' | 'success'
   const [isProcessing, setIsProcessing] = useState(false);
@@ -114,11 +116,18 @@ export function CheckoutModal({
                 Total Order Amount ({items.length} unique items)
               </div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                Includes {shippingFee === 0 ? 'Free Shipping' : `$${shippingFee.toFixed(2)} Shipping`} & Taxes
+                Includes {shippingFee === 0 ? 'Free Shipping' : `${formatCurrency(shippingFee)} Shipping`} & Taxes
               </div>
             </div>
-            <div className="font-mono" style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--brand-primary)' }}>
-              {formatCurrency(grandTotal)}
+            <div style={{ textAlign: 'right' }}>
+              <div className="font-mono" style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--brand-primary)' }}>
+                {formatCurrency(grandTotal)}
+              </div>
+              {currency !== 'USD' && (
+                <div style={{ fontSize: '0.6875rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                  Base amount: ${grandTotal.toFixed(2)} USD
+                </div>
+              )}
             </div>
           </div>
 
