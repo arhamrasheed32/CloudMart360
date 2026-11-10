@@ -100,7 +100,7 @@ export function TopBar({
       {/* Right Area: System Status, Notifications, Refresh, Add Action & Profile */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'relative' }}>
         {/* Live DynamoDB Status Badge -> Opens Architecture Inspector */}
-        <Tooltip text="Click to view AWS Serverless Infrastructure & Latency">
+        <Tooltip text="Click to view AWS Serverless Infrastructure & Latency" position="bottom">
           <div
             onClick={() => {
               playClickTone();
@@ -147,7 +147,7 @@ export function TopBar({
         </Tooltip>
 
         {/* Sync / Refresh Button */}
-        <Tooltip text="Synchronize Catalog with DynamoDB">
+        <Tooltip text="Synchronize Catalog with DynamoDB" position="bottom">
           <Button
             variant="secondary"
             size="sm"
@@ -166,7 +166,7 @@ export function TopBar({
 
         {/* Low Stock Replenish CTA if any items are low */}
         {alertCount > 0 && onOpenRestock && (
-          <Tooltip text={`${alertCount} items below safety stock. Click to replenish.`}>
+          <Tooltip text={`${alertCount} items below safety stock. Click to replenish.`} position="bottom">
             <Button
               variant="secondary"
               size="sm"
@@ -190,7 +190,7 @@ export function TopBar({
 
         {/* Notification Bell with Dropdown */}
         <div style={{ position: 'relative' }}>
-          <Tooltip text="Catalog Alerts & Notifications">
+          <Tooltip text="Catalog Alerts & Notifications" position="bottom">
             <button
               onClick={() => {
                 playClickTone();
@@ -259,7 +259,7 @@ export function TopBar({
         </Button>
 
         {/* Theme Settings & Profile Avatar */}
-        <Tooltip text="Theme Accent & Profile Settings">
+        <Tooltip text="Theme Accent & Profile Settings" position="bottom">
           <div
             onClick={() => {
               playClickTone();

@@ -640,3 +640,4 @@ export function AdminAnalytics({ products = [], onNavigate }) {
     </div>
   );
 }
+

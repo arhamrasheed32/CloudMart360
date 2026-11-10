@@ -40,6 +40,7 @@ export function InlineStockAdjuster({
         flexDirection: 'column',
         gap: '10px',
         minWidth: '220px',
+        maxWidth: 'calc(100vw - 32px)',
         animation: 'scaleUp 120ms ease-out'
       }}
     >

@@ -241,3 +241,4 @@ export function saveStoredNotifications(notifs) {
     console.error('Failed to save notifications to localStorage', e);
   }
 }
+
