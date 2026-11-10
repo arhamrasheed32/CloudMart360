@@ -1,4 +1,5 @@
 import { ordersService } from '../db.js';
+import { snsService } from '../services/snsService.js';
 
 export async function getOrdersHandler(event) {
   try {
@@ -48,6 +49,18 @@ export async function createOrderHandler(event) {
 
     const savedOrder = await ordersService.createOrder(body);
 
+    // Asynchronously trigger Amazon SNS Order Confirmation & Customer Subscription
+    try {
+      if (body.email) {
+        snsService.subscribeCustomer(body.email).catch(() => {});
+      }
+      snsService.publishOrderConfirmation(savedOrder).catch(err => {
+        console.warn('[CreateOrderHandler] SNS publish note:', err.message);
+      });
+    } catch (snsErr) {
+      console.warn('[CreateOrderHandler] SNS trigger note:', snsErr.message);
+    }
+
     return {
       statusCode: 201,
       headers: {
@@ -93,6 +106,15 @@ export async function updateOrderStatusHandler(event) {
     }
 
     const updated = await ordersService.updateOrderStatus(orderId, status);
+
+    // Asynchronously trigger Amazon SNS Delivery Status Update
+    try {
+      snsService.publishDeliveryUpdate(orderId, status, updated || body).catch(err => {
+        console.warn('[UpdateOrderStatusHandler] SNS delivery note:', err.message);
+      });
+    } catch (snsErr) {
+      console.warn('[UpdateOrderStatusHandler] SNS status trigger note:', snsErr.message);
+    }
 
     return {
       statusCode: 200,

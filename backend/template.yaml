@@ -83,6 +83,15 @@ Resources:
         PointInTimeRecoveryEnabled: true
 
   # =========================================================================
+  # Amazon SNS Topic - Order Confirmations & Delivery Notifications
+  # =========================================================================
+  OrderUpdatesTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: CloudMart360-OrderUpdates
+      DisplayName: "CloudMart 360 Live Order Updates"
+
+  # =========================================================================
   # AWS Lambda Handlers
   # =========================================================================
   GetProductsFunction:
