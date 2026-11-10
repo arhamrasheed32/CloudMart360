@@ -173,3 +173,4 @@ export function CurrencySelector({ compact = false }) {
     </div>
   );
 }
+

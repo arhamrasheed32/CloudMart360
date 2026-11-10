@@ -5,13 +5,14 @@ import { StoreView } from './components/storefront/StoreView.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { AuthModal } from './components/layout/AuthModal.jsx';
 import { CartProvider } from './context/CartContext.jsx';
-import { CurrencyProvider } from './context/CurrencyContext.jsx';
+import { CurrencyProvider, useCurrency } from './context/CurrencyContext.jsx';
 import { ToastProvider } from './context/ToastContext.jsx';
 import { useProducts } from './hooks/useProducts.js';
 
 function MainApp() {
   const productState = useProducts();
   const { user, isAdmin, openAuthModal } = useAuth();
+  const { currency } = useCurrency(); // Subscribes MainApp to re-render tree when currency changes
   const [appMode, setAppMode] = useState('storefront'); // 'storefront' | 'admin'
   const [isAddDrawerOpen, setIsAddDrawerOpen] = useState(false);
   const [isRestockOpen, setIsRestockOpen] = useState(false);
