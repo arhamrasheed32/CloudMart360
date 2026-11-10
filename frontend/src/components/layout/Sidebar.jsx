@@ -37,36 +37,41 @@ export function Sidebar({
       id: 'overview',
       label: 'Overview',
       icon: LayoutDashboard,
-      status: 'planned',
-      badge: 'Module 2'
+      status: 'active',
+      badge: 'Live',
+      badgeVariant: 'brand'
     },
     {
       id: 'inventory',
       label: 'Inventory',
       icon: Boxes,
-      status: 'planned',
-      badge: 'Planned'
+      status: 'active',
+      badge: 'Live',
+      badgeVariant: 'brand'
     },
     {
       id: 'orders',
       label: 'Orders',
       icon: ShoppingCart,
-      status: 'planned',
-      badge: 'Planned'
+      status: 'active',
+      badge: 'Live',
+      badgeVariant: 'brand'
     },
     {
       id: 'notifications',
       label: 'Notifications',
       icon: Bell,
-      status: 'planned',
-      badge: 'Planned'
+      status: 'active',
+      badge: 'Live',
+      badgeVariant: 'brand'
     },
     {
       id: 'analytics',
       label: 'Analytics',
       icon: BarChart3,
-      status: 'planned',
-      badge: 'Planned'
+      status: 'active',
+      badge: 'Live',
+      badgeVariant: 'brand'
     }
   ];
 
@@ -246,9 +251,15 @@ export function Sidebar({
                   style={{
                     fontSize: '0.625rem',
                     padding: '1px 6px',
-                    background: isItemActive ? 'rgba(255, 87, 34, 0.25)' : 'rgba(255, 255, 255, 0.04)',
-                    color: isItemActive ? 'var(--brand-primary)' : 'var(--text-faint)',
-                    border: isItemActive ? '1px solid rgba(255, 87, 34, 0.35)' : '1px solid var(--border-subtle)'
+                    background: isItemActive
+                      ? 'rgba(255, 87, 34, 0.25)'
+                      : 'rgba(255, 87, 34, 0.1)',
+                    color: isItemActive
+                      ? 'var(--brand-primary)'
+                      : 'rgba(255, 110, 64, 0.85)',
+                    border: isItemActive
+                      ? '1px solid rgba(255, 87, 34, 0.4)'
+                      : '1px solid rgba(255, 87, 34, 0.25)'
                   }}
                 >
                   {item.badge}

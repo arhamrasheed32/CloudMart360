@@ -17,6 +17,7 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useCurrency } from '../../context/CurrencyContext.jsx';
 import { formatCurrency } from '../../utils/formatters.js';
 import { playSuccessChime } from '../../utils/audioFeedback.js';
+import { saveStoredOrder } from '../../utils/ordersManager.js';
 
 export function CheckoutModal({
   isOpen,
@@ -65,6 +66,20 @@ export function CheckoutModal({
       };
 
       setOrderReceipt(receipt);
+
+      // Persist to admin orders store
+      saveStoredOrder({
+        orderId: orderNumber,
+        date: 'Just now',
+        customer: shippingData.fullName,
+        email: shippingData.email,
+        address: `${shippingData.address}, ${shippingData.city}, ${shippingData.state} ${shippingData.zipCode}`,
+        carrier: 'FedEx Express Worldwide',
+        trackingNumber: `FDX-${Math.floor(10000000000 + Math.random() * 90000000000)}`,
+        status: 'Processing',
+        grandTotal,
+        items: [...items]
+      });
 
       // Call parent mutation to decrement real stock in DynamoDB
       if (onCompleteOrder) {

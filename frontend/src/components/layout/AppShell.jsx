@@ -10,7 +10,9 @@ export function AppShell({
   onOpenRestock,
   onSwitchToStore,
   products = [],
-  databaseEngine = 'Amazon DynamoDB'
+  databaseEngine = 'Amazon DynamoDB',
+  activeNav = 'products',
+  onNavigate
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -34,7 +36,8 @@ export function AppShell({
     <div className="ambient-glow-bg app-layout">
       {/* Sidebar navigation */}
       <Sidebar
-        activeNav="products"
+        activeNav={activeNav}
+        onNavigate={onNavigate}
         isCollapsed={isCollapsed}
         onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
         isMobileOpen={isMobileOpen}
