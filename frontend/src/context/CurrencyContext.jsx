@@ -48,15 +48,6 @@ export const CURRENCY_CONFIG = {
     locale: 'ar-AE',
     flag: '🇦🇪',
     label: 'AED (د.إ)'
-  },
-  SAR: {
-    code: 'SAR',
-    name: 'Saudi Riyal',
-    symbol: '﷼',
-    rate: 3.75,
-    locale: 'ar-SA',
-    flag: '🇸🇦',
-    label: 'SAR (﷼)'
   }
 };
 
