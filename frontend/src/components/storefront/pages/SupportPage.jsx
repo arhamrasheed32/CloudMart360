@@ -19,6 +19,7 @@ import { Textarea } from '../../ui/Textarea.jsx';
 import { SpotlightCard } from '../../ui/SpotlightCard.jsx';
 import { useToast } from '../../../context/ToastContext.jsx';
 import { playSuccessChime } from '../../../utils/audioFeedback.js';
+import { getStoredNotifications, saveStoredNotifications } from '../../../utils/ordersManager.js';
 
 const FAQS = [
   {
@@ -75,8 +76,26 @@ export function SupportPage() {
     e.preventDefault();
     setIsSending(true);
     await new Promise((r) => setTimeout(r, 600));
+
+    const ticketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    // Push live ticket notification to Admin Console
+    try {
+      const notifs = getStoredNotifications();
+      const newNotif = {
+        id: `notif-${Date.now()}`,
+        type: 'warning',
+        category: 'Support',
+        title: `Customer Support Ticket: ${ticketId}`,
+        message: `${contactForm.name} (${contactForm.email}) submitted inquiry: "${contactForm.subject || 'General'}" - ${contactForm.message.slice(0, 80)}...`,
+        time: 'Just now',
+        read: false
+      };
+      saveStoredNotifications([newNotif, ...notifs]);
+    } catch (err) {}
+
     playSuccessChime();
-    showSuccess(`Your support ticket (TKT-${Math.floor(1000 + Math.random() * 9000)}) has been logged!`, 'Ticket Submitted');
+    showSuccess(`Your support ticket (${ticketId}) has been logged!`, 'Ticket Submitted');
     setContactForm({ name: '', email: '', subject: '', message: '' });
     setIsSending(false);
   };
