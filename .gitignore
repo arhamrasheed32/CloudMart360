@@ -8,3 +8,6 @@ npm-debug.log*
 .DS_Store
 .vscode/
 coverage/
+.aws-sam/
+samconfig.toml
+

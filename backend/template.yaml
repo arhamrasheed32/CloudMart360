@@ -60,8 +60,8 @@ Resources:
   GetProductsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
-      Handler: handlers/getProducts.handler
+      CodeUri: ./
+      Handler: src/handlers/getProducts.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
@@ -75,8 +75,8 @@ Resources:
   GetProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
-      Handler: handlers/getProduct.handler
+      CodeUri: ./
+      Handler: src/handlers/getProduct.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
@@ -90,8 +90,8 @@ Resources:
   CreateProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
-      Handler: handlers/createProduct.handler
+      CodeUri: ./
+      Handler: src/handlers/createProduct.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
@@ -105,8 +105,8 @@ Resources:
   UpdateProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
-      Handler: handlers/updateProduct.handler
+      CodeUri: ./
+      Handler: src/handlers/updateProduct.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
@@ -120,8 +120,8 @@ Resources:
   DeleteProductFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
-      Handler: handlers/deleteProduct.handler
+      CodeUri: ./
+      Handler: src/handlers/deleteProduct.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ProductsTable
