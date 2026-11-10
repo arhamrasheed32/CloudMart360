@@ -150,5 +150,38 @@ export const apiService = {
    */
   async getStatus() {
     return await request('/status', { method: 'GET' });
+  },
+
+  /**
+   * Amazon Cognito: Sign up new customer
+   */
+  async signup(email, password, name = '') {
+    return await request('/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({ email, password, name })
+    });
+  },
+
+  /**
+   * Amazon Cognito: Verify email 6-digit confirmation code
+   */
+  async verifyEmail(email, code) {
+    return await request('/auth/verify', {
+      method: 'POST',
+      body: JSON.stringify({ email, code })
+    });
+  },
+
+  /**
+   * Amazon Cognito: Login for Customer or Admin
+   */
+  async login(email, password) {
+    return await request('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password })
+    });
   }
 };
+
+export const api = apiService;
+

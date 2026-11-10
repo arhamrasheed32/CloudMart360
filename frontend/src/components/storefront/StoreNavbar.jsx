@@ -18,6 +18,7 @@ import {
 import { Button } from '../ui/Button.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useCurrency } from '../../context/CurrencyContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { formatCurrency } from '../../utils/formatters.js';
 import { playClickTone } from '../../utils/audioFeedback.js';
 
@@ -32,6 +33,7 @@ export function StoreNavbar({
 }) {
   const { totalItemsCount, setIsCartOpen } = useCart();
   const { currency, setCurrency, rates } = useCurrency();
+  const { user, isAdmin, logout, openAuthModal } = useAuth();
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const searchContainerRef = useRef(null);
 
@@ -372,6 +374,54 @@ export function StoreNavbar({
               </span>
             )}
           </button>
+
+          {/* User Sign In / Profile Button (Amazon Cognito) */}
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  fontSize: '0.75rem',
+                  padding: '4px 10px',
+                  borderRadius: 'var(--radius-full)',
+                  background: isAdmin ? 'rgba(255, 87, 34, 0.15)' : 'rgba(59, 130, 246, 0.15)',
+                  border: `1px solid ${isAdmin ? 'rgba(255, 87, 34, 0.4)' : 'rgba(59, 130, 246, 0.4)'}`,
+                  color: isAdmin ? 'var(--brand-primary)' : '#60a5fa',
+                  fontWeight: 600
+                }}
+              >
+                {isAdmin ? '🛡️ Admin' : '👤 Customer'}: {user.email.split('@')[0]}
+              </span>
+              <button
+                onClick={logout}
+                style={{
+                  fontSize: '0.7rem',
+                  padding: '5px 8px',
+                  background: 'transparent',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  color: 'var(--text-muted)',
+                  borderRadius: 'var(--radius-sm)',
+                  cursor: 'pointer'
+                }}
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => openAuthModal('login')}
+              style={{
+                height: '36px',
+                padding: '0 12px',
+                fontSize: '0.8125rem',
+                border: '1px solid var(--border-medium)',
+                color: 'var(--text-primary)'
+              }}
+            >
+              Sign In
+            </Button>
+          )}
 
           {/* Switch to Admin Mode Switcher */}
           <Button

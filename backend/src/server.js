@@ -12,6 +12,11 @@ import {
 } from './handlers/batchOperations.js';
 import { dbService } from './db.js';
 import { INITIAL_PRODUCTS } from './seed.js';
+import {
+  customerSignUp,
+  verifyEmailCode,
+  authenticateUser
+} from './cognitoAuth.js';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -113,6 +118,60 @@ app.delete('/api/products/:id', async (req, res) => {
   const event = createApiGatewayEvent(req);
   const result = await deleteProductHandler(event);
   sendLambdaResponse(res, result);
+});
+
+// =========================================================================
+// Amazon Cognito Authentication Endpoints (Module 3)
+// =========================================================================
+
+// 1. Customer Sign Up
+app.post('/api/auth/signup', async (req, res) => {
+  try {
+    const { email, password, name } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+    const result = await customerSignUp(email, password, name);
+    res.status(201).json({
+      success: true,
+      message: 'Verification code sent to email',
+      userSub: result.UserSub,
+      userConfirmed: result.UserConfirmed
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message || 'Failed to sign up with Cognito' });
+  }
+});
+
+// 2. Customer Email Code Verification
+app.post('/api/auth/verify', async (req, res) => {
+  try {
+    const { email, code } = req.body;
+    if (!email || !code) {
+      return res.status(400).json({ error: 'Email and 6-digit confirmation code are required.' });
+    }
+    await verifyEmailCode(email, code);
+    res.json({
+      success: true,
+      message: 'Email verified successfully! You can now sign in.'
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message || 'Invalid or expired confirmation code' });
+  }
+});
+
+// 3. User & Admin Sign In
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+    const authResult = await authenticateUser(email, password);
+    res.json(authResult);
+  } catch (err) {
+    res.status(401).json({ error: err.message || 'Authentication failed' });
+  }
 });
 
 // System Status & Architecture metadata endpoint
