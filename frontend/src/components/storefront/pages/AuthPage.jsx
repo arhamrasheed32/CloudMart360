@@ -89,11 +89,15 @@ export function AuthPage({ initialView = 'signin', onBackToHome, onAuthSuccess }
         onBackToHome();
       }
     } catch (err) {
-      if (err.data?.code === 'UserNotConfirmedException') {
+      if (err.name === 'UserNotConfirmedException' || err.data?.code === 'UserNotConfirmedException') {
         setView('verify');
         setErrorMsg('Please enter the 6-digit verification code sent to your email to confirm your account.');
+      } else if (err.name === 'NotAuthorizedException') {
+        setErrorMsg('Incorrect email or password. Please verify your credentials.');
+      } else if (err.name === 'UserNotFoundException') {
+        setErrorMsg('No account found with this email. Please check your spelling or sign up.');
       } else {
-        setErrorMsg(err.message || 'Incorrect email or password.');
+        setErrorMsg(err.message || 'Sign in failed. Please verify your credentials.');
       }
     } finally {
       setLoading(false);
