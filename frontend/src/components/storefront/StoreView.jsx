@@ -5,6 +5,8 @@ import { ShopPage } from './pages/ShopPage.jsx';
 import { CollectionsPage } from './pages/CollectionsPage.jsx';
 import { AboutPage } from './pages/AboutPage.jsx';
 import { SupportPage } from './pages/SupportPage.jsx';
+import { AuthPage } from './pages/AuthPage.jsx';
+import { AdminLoginPage } from './pages/AdminLoginPage.jsx';
 import { CartDrawer } from './CartDrawer.jsx';
 import { CheckoutModal } from './CheckoutModal.jsx';
 import { StoreProductModal } from './StoreProductModal.jsx';
@@ -16,7 +18,7 @@ export function StoreView({
   onSwitchToAdmin,
   onAdjustStock
 }) {
-  const [activePage, setActivePage] = useState('home'); // 'home' | 'shop' | 'collections' | 'about' | 'support'
+  const [activePage, setActivePage] = useState('home'); // 'home' | 'shop' | 'collections' | 'about' | 'support' | 'auth_signin' | 'auth_signup' | 'admin_login'
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [search, setSearch] = useState('');
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
@@ -34,6 +36,37 @@ export function StoreView({
     setActivePage(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // If user opens Dedicated Auth or Admin page, render it full page
+  if (activePage === 'auth_signin' || activePage === 'auth_signup') {
+    return (
+      <AuthPage
+        initialView={activePage === 'auth_signup' ? 'signup' : 'signin'}
+        onBackToHome={() => {
+          setActivePage('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onAuthSuccess={() => {
+          setActivePage('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+    );
+  }
+
+  if (activePage === 'admin_login') {
+    return (
+      <AdminLoginPage
+        onBackToHome={() => {
+          setActivePage('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onAdminSuccess={() => {
+          onSwitchToAdmin();
+        }}
+      />
+    );
+  }
 
   const handleCompleteOrder = async (orderedItems) => {
     // Decrement stock in DynamoDB for each purchased item

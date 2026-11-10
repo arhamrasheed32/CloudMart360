@@ -375,7 +375,7 @@ export function StoreNavbar({
             )}
           </button>
 
-          {/* User Sign In / Profile Button (Amazon Cognito) */}
+          {/* User Sign In / Register / Profile Button (Amazon Cognito) */}
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span
@@ -407,20 +407,46 @@ export function StoreNavbar({
               </button>
             </div>
           ) : (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => openAuthModal('login')}
-              style={{
-                height: '36px',
-                padding: '0 12px',
-                fontSize: '0.8125rem',
-                border: '1px solid var(--border-medium)',
-                color: 'var(--text-primary)'
-              }}
-            >
-              Sign In
-            </Button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button
+                onClick={() => {
+                  playClickTone();
+                  onNavigatePage('auth_signin');
+                }}
+                style={{
+                  fontSize: '0.8125rem',
+                  fontWeight: 600,
+                  color: 'var(--text-primary)',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '6px 10px',
+                  borderRadius: 'var(--radius-sm)'
+                }}
+              >
+                Sign In
+              </button>
+
+              <button
+                onClick={() => {
+                  playClickTone();
+                  onNavigatePage('auth_signup');
+                }}
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  background: 'linear-gradient(135deg, #FF5722 0%, #D84315 100%)',
+                  border: 'none',
+                  borderRadius: 'var(--radius-full)',
+                  padding: '7px 14px',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(255, 87, 34, 0.4)'
+                }}
+              >
+                Sign Up
+              </button>
+            </div>
           )}
 
           {/* Switch to Admin Mode Switcher */}
@@ -429,7 +455,7 @@ export function StoreNavbar({
             size="sm"
             onClick={() => {
               playClickTone();
-              onSwitchToAdmin();
+              onNavigatePage('admin_login');
             }}
             icon={LayoutDashboard}
             style={{
@@ -440,7 +466,7 @@ export function StoreNavbar({
               color: 'var(--brand-primary)'
             }}
           >
-            <span style={{ fontWeight: 700 }}>Admin Console</span>
+            <span style={{ fontWeight: 700 }}>Admin Login</span>
           </Button>
         </div>
       </header>
