@@ -155,6 +155,60 @@ export const apiService = {
   },
 
   /**
+   * Fetch all orders from DynamoDB CloudMart360-Orders
+   */
+  async getOrders() {
+    return await request('/orders', { method: 'GET' });
+  },
+
+  /**
+   * Persist a new order to DynamoDB CloudMart360-Orders
+   */
+  async createOrder(orderData) {
+    return await request('/orders', {
+      method: 'POST',
+      body: JSON.stringify(orderData)
+    });
+  },
+
+  /**
+   * Update an order status in DynamoDB
+   */
+  async updateOrderStatus(id, status) {
+    return await request(`/orders/${encodeURIComponent(id)}/status`, {
+      method: 'PUT',
+      body: JSON.stringify({ status })
+    });
+  },
+
+  /**
+   * Fetch all support tickets from DynamoDB CloudMart360-Tickets
+   */
+  async getTickets() {
+    return await request('/tickets', { method: 'GET' });
+  },
+
+  /**
+   * Create a support ticket in DynamoDB CloudMart360-Tickets
+   */
+  async createTicket(ticketData) {
+    return await request('/tickets', {
+      method: 'POST',
+      body: JSON.stringify(ticketData)
+    });
+  },
+
+  /**
+   * Update a support ticket status in DynamoDB
+   */
+  async updateTicketStatus(id, status) {
+    return await request(`/tickets/${encodeURIComponent(id)}/status`, {
+      method: 'PUT',
+      body: JSON.stringify({ status })
+    });
+  },
+
+  /**
    * Get system & architecture status
    */
   async getStatus() {

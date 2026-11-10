@@ -10,7 +10,17 @@ import {
   batchDeleteHandler,
   stockAdjustHandler
 } from './handlers/batchOperations.js';
-import { dbService } from './db.js';
+import {
+  getOrdersHandler,
+  createOrderHandler,
+  updateOrderStatusHandler
+} from './handlers/orders.js';
+import {
+  getTicketsHandler,
+  createTicketHandler,
+  updateTicketStatusHandler
+} from './handlers/tickets.js';
+import { dbService, ordersService, ticketsService } from './db.js';
 import { INITIAL_PRODUCTS } from './seed.js';
 import {
   customerSignUp,
@@ -252,6 +262,48 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// ==========================================
+// Orders Endpoints (Amazon DynamoDB CloudMart360-Orders Table)
+// ==========================================
+app.get('/api/orders', async (req, res) => {
+  const event = createApiGatewayEvent(req);
+  const result = await getOrdersHandler(event);
+  sendLambdaResponse(res, result);
+});
+
+app.post('/api/orders', async (req, res) => {
+  const event = createApiGatewayEvent(req);
+  const result = await createOrderHandler(event);
+  sendLambdaResponse(res, result);
+});
+
+app.put('/api/orders/:id/status', async (req, res) => {
+  const event = createApiGatewayEvent(req);
+  const result = await updateOrderStatusHandler(event);
+  sendLambdaResponse(res, result);
+});
+
+// ==========================================
+// Support Tickets Endpoints (Amazon DynamoDB CloudMart360-Tickets Table)
+// ==========================================
+app.get('/api/tickets', async (req, res) => {
+  const event = createApiGatewayEvent(req);
+  const result = await getTicketsHandler(event);
+  sendLambdaResponse(res, result);
+});
+
+app.post('/api/tickets', async (req, res) => {
+  const event = createApiGatewayEvent(req);
+  const result = await createTicketHandler(event);
+  sendLambdaResponse(res, result);
+});
+
+app.put('/api/tickets/:id/status', async (req, res) => {
+  const event = createApiGatewayEvent(req);
+  const result = await updateTicketStatusHandler(event);
+  sendLambdaResponse(res, result);
+});
+
 // System Status & Architecture metadata endpoint
 app.get('/api/status', async (req, res) => {
   const products = await dbService.getAllProducts();
@@ -285,6 +337,48 @@ async function init() {
     console.log('[Server] No products detected. Seeding initial retail catalog...');
     await dbService.seedProducts(INITIAL_PRODUCTS);
   }
+
+  const existingOrders = await ordersService.getAllOrders();
+  if (existingOrders.length === 0) {
+    console.log('[Server] Seeding initial customer orders into DynamoDB CloudMart360-Orders...');
+    await ordersService.createOrder({
+      orderId: 'CM360-ORD-892140',
+      date: 'Today, 10:14 AM',
+      customer: 'Jane Doe',
+      email: 'jane.doe@example.com',
+      address: '742 Evergreen Terrace, San Francisco, CA 94107',
+      carrier: 'FedEx Express Worldwide',
+      trackingNumber: 'FDX-99201948210',
+      status: 'Out for Delivery',
+      paymentMethod: 'Visa (•••• 4242)',
+      grandTotal: 249.99,
+      items: [
+        {
+          product: {
+            id: 'prod-001-aura-pro',
+            name: 'Aura Pro Noise Cancelling Headphones',
+            price: 249.99,
+            sku: 'CM-ELE-AUR-9021',
+            category: 'Electronics'
+          },
+          quantity: 1
+        }
+      ]
+    });
+  }
+
+  const existingTickets = await ticketsService.getAllTickets();
+  if (existingTickets.length === 0) {
+    console.log('[Server] Seeding initial support tickets into DynamoDB CloudMart360-Tickets...');
+    await ticketsService.createTicket({
+      ticketId: 'TKT-9959',
+      name: 'David Miller',
+      email: 'david@example.com',
+      subject: 'Inquiry regarding Order CM360-ORD-892140',
+      message: 'Hello, please confirm if the package includes the carrying case and USB-C audio cable.',
+      status: 'open'
+    });
+  }
 }
 
 init().then(() => {
@@ -292,12 +386,22 @@ init().then(() => {
     console.log(`========================================================`);
     console.log(`  CLOUDMART 360 - API GATEWAY & LAMBDA SERVER`);
     console.log(`  Running on: http://localhost:${PORT}`);
+    console.log(`  DynamoDB Tables Connected:`);
+    console.log(`    • CloudMart360-Products`);
+    console.log(`    • CloudMart360-Orders`);
+    console.log(`    • CloudMart360-Tickets`);
     console.log(`  Endpoints:`);
     console.log(`    GET    /api/products`);
     console.log(`    POST   /api/products`);
     console.log(`    GET    /api/products/:id`);
     console.log(`    PUT    /api/products/:id`);
     console.log(`    DELETE /api/products/:id`);
+    console.log(`    GET    /api/orders`);
+    console.log(`    POST   /api/orders`);
+    console.log(`    PUT    /api/orders/:id/status`);
+    console.log(`    GET    /api/tickets`);
+    console.log(`    POST   /api/tickets`);
+    console.log(`    PUT    /api/tickets/:id/status`);
     console.log(`    GET    /api/status`);
     console.log(`========================================================`);
   });

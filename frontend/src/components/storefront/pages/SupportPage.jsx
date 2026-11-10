@@ -20,6 +20,7 @@ import { SpotlightCard } from '../../ui/SpotlightCard.jsx';
 import { useToast } from '../../../context/ToastContext.jsx';
 import { playSuccessChime } from '../../../utils/audioFeedback.js';
 import { getStoredNotifications, saveStoredNotifications } from '../../../utils/ordersManager.js';
+import { api } from '../../../services/api.js';
 
 const FAQS = [
   {
@@ -87,12 +88,26 @@ export function SupportPage() {
         type: 'warning',
         category: 'Support',
         title: `Customer Support Ticket: ${ticketId}`,
-        message: `${contactForm.name} (${contactForm.email}) submitted inquiry: "${contactForm.subject || 'General'}" - ${contactForm.message.slice(0, 80)}...`,
+        message: `${contactForm.name} (${contactForm.email}) submitted inquiry: "${contactForm.subject || 'General'}" - ${contactForm.message.slice(0, 80)}... Saved to DynamoDB CloudMart360-Tickets.`,
         time: 'Just now',
         read: false
       };
       saveStoredNotifications([newNotif, ...notifs]);
     } catch (err) {}
+
+    // Persist to DynamoDB CloudMart360-Tickets table
+    api.createTicket({
+      ticketId,
+      name: contactForm.name,
+      email: contactForm.email,
+      subject: contactForm.subject || 'General Inquiry',
+      message: contactForm.message,
+      status: 'open'
+    }).then((res) => {
+      console.log('[SupportPage] Ticket saved to DynamoDB CloudMart360-Tickets:', res);
+    }).catch((err) => {
+      console.warn('[SupportPage] DynamoDB ticket sync warning:', err.message);
+    });
 
     playSuccessChime();
     showSuccess(`Your support ticket (${ticketId}) has been logged!`, 'Ticket Submitted');

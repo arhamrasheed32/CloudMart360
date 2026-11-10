@@ -18,7 +18,7 @@ import { Button } from '../ui/Button.jsx';
 import { Modal } from '../ui/Modal.jsx';
 import { SpotlightCard } from '../ui/SpotlightCard.jsx';
 import { formatCurrency } from '../../utils/formatters.js';
-import { getStoredOrders, updateStoredOrderStatus } from '../../utils/ordersManager.js';
+import { getStoredOrders, updateStoredOrderStatus, fetchOrdersFromDynamoDB } from '../../utils/ordersManager.js';
 import { useToast } from '../../context/ToastContext.jsx';
 import { playSuccessChime } from '../../utils/audioFeedback.js';
 
@@ -31,6 +31,9 @@ export function AdminOrders() {
 
   useEffect(() => {
     setOrders(getStoredOrders());
+    fetchOrdersFromDynamoDB().then((liveOrders) => {
+      if (liveOrders) setOrders(liveOrders);
+    });
   }, []);
 
   const handleUpdateStatus = (orderId, newStatus) => {

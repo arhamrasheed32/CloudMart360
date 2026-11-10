@@ -1,4 +1,6 @@
 // Order Management & Notification Storage for CloudMart 360 Admin
+import { api } from '../services/api.js';
+
 const ORDERS_STORAGE_KEY = 'cloudmart_orders_v1';
 const NOTIFS_STORAGE_KEY = 'cloudmart_notifs_v1';
 
@@ -154,6 +156,13 @@ export function saveStoredOrder(order) {
     const updated = [order, ...orders];
     localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(updated));
 
+    // Asynchronously persist to Amazon DynamoDB (CloudMart360-Orders Table)
+    api.createOrder(order).then((res) => {
+      console.log('[OrdersManager] Order persisted to DynamoDB CloudMart360-Orders:', res);
+    }).catch((err) => {
+      console.warn('[OrdersManager] DynamoDB order sync warning (saved locally):', err.message);
+    });
+
     // Also push a live notification into the Admin notification stream
     try {
       const notifs = getStoredNotifications();
@@ -162,7 +171,7 @@ export function saveStoredOrder(order) {
         type: 'success',
         category: 'Order',
         title: `Customer Order Placed: #${order.orderId}`,
-        message: `Customer ${order.customer} placed an order for $${Number(order.grandTotal).toFixed(2)} (${order.items?.length || 1} items). Paid via ${order.paymentMethod || 'Credit Card'}.`,
+        message: `Customer ${order.customer} placed an order for $${Number(order.grandTotal).toFixed(2)} (${order.items?.length || 1} items). Paid via ${order.paymentMethod || 'Credit Card'}. Saved to Amazon DynamoDB.`,
         time: 'Just now',
         read: false
       };
@@ -183,11 +192,38 @@ export function updateStoredOrderStatus(orderId, newStatus) {
     const orders = getStoredOrders();
     const updated = orders.map((o) => (o.orderId === orderId ? { ...o, status: newStatus } : o));
     localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(updated));
+
+    // Asynchronously update status in Amazon DynamoDB
+    api.updateOrderStatus(orderId, newStatus).then((res) => {
+      console.log('[OrdersManager] Status updated in DynamoDB:', res);
+    }).catch((err) => {
+      console.warn('[OrdersManager] DynamoDB status update warning:', err.message);
+    });
+
     return updated;
   } catch (e) {
     console.error('Failed to update order status in localStorage', e);
     return [];
   }
+}
+
+export async function fetchOrdersFromDynamoDB() {
+  try {
+    const data = await api.getOrders();
+    if (data && Array.isArray(data.orders) && data.orders.length > 0) {
+      const local = getStoredOrders();
+      // Merge unique orders
+      const map = new Map();
+      local.forEach(o => map.set(o.orderId, o));
+      data.orders.forEach(o => map.set(o.orderId, o));
+      const merged = Array.from(map.values());
+      localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(merged));
+      return merged;
+    }
+  } catch (e) {
+    console.warn('[OrdersManager] Failed to fetch orders from DynamoDB, using local cache:', e.message);
+  }
+  return getStoredOrders();
 }
 
 const INITIAL_NOTIFICATIONS = [
